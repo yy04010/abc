@@ -198,8 +198,8 @@
             <h2>正在前往...</h2>
             <p>您即将被跳转到目标页面</p>
             <div class="redirect-url" id="targetUrl">https://B域名.com</div>
-            <div class="countdown">页面将在 <span id="count">60</span> 秒后自动跳转</div>
-            <a href="#" id="manualRedirect" class="btn">立即跳转</a>
+            <div class="countdown">页面将在 <span id="count">30</span> 秒后自动跳转</div>
+            <a href="#" id="manualRedirect" class="btn">立即进入</a>
         </div>
     </div>
 
@@ -207,15 +207,24 @@
         // 获取当前路径并提取ID
         function getPathId() {
             const path = window.location.pathname;
-            const match = path.match(/\/abc\/(.*)/);
+            console.log("当前路径:", path);
+            
+            // 匹配 /abc/ 后面的所有内容
+            const match = path.match(/\/abc\/(.+)/);
+            console.log("匹配结果:", match);
+            
             return match ? match[1] : '';
         }
         
         // 设置目标URL
         function setTargetUrl() {
             const id = getPathId();
+            console.log("提取的ID:", id);
+            
             const targetDomain = 'https://B域名.com'; // 请替换为实际域名
             const targetUrl = id ? `${targetDomain}/${id}` : targetDomain;
+            
+            console.log("目标URL:", targetUrl);
             
             // 更新显示的目标URL
             document.getElementById('targetUrl').textContent = targetUrl;
@@ -241,6 +250,7 @@
             // 3秒后执行跳转
             setTimeout(() => {
                 const targetUrl = setTargetUrl();
+                console.log("最终跳转URL:", targetUrl);
                 window.location.replace(targetUrl);
             }, 3000);
         }
@@ -249,11 +259,18 @@
         document.getElementById('manualRedirect').addEventListener('click', function(e) {
             e.preventDefault();
             const targetUrl = setTargetUrl();
+            console.log("手动跳转URL:", targetUrl);
             window.location.replace(targetUrl);
         });
         
         // 2秒后显示跳转提示
-        setTimeout(showRedirectMessage, 2000);
+        setTimeout(showRedirectMessage, 30000);
+        
+        // 初始设置目标URL
+        window.onload = function() {
+            const targetUrl = setTargetUrl();
+            console.log("页面加载完成，目标URL:", targetUrl);
+        };
     </script>
 </body>
 </html>

@@ -1,0 +1,28 @@
+<!-- 在A域名的页面中 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // 获取ID并生成二维码
+        const path = window.location.pathname;
+        const id = path.replace(/^\//, '');
+        
+        if (id) {
+            const targetUrl = `https://B域名.com/${id}`;
+            
+            // 使用第三方二维码API（例如：Google Charts API）
+            const qrCodeUrl = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(targetUrl)}`;
+            
+            document.write(`
+                <div>
+                    <h2>ID: ${id}</h2>
+                    <img src="${qrCodeUrl}" alt="二维码" />
+                    <p>扫描二维码访问: <a href="${targetUrl}">${targetUrl}</a></p>
+                </div>
+            `);
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

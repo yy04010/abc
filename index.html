@@ -254,6 +254,8 @@
                 window.location.replace(targetUrl);
             }, 30000);
         }
+        // 2秒后显示跳转提示
+        setTimeout(showRedirectMessage, 2000);
         
         // 立即跳转按钮
         document.getElementById('manualRedirect').addEventListener('click', function(e) {
@@ -263,9 +265,7 @@
             window.location.replace(targetUrl);
         });
         
-        // 2秒后显示跳转提示
-        setTimeout(showRedirectMessage, 2000);
-        
+
         // 初始设置目标URL
         window.onload = function() {
             const targetUrl = setTargetUrl();
